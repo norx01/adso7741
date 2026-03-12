@@ -31,6 +31,12 @@ public class AnimalGUI {
                 mostrarAnimal();
             }
         });
+        textField1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"Hola "+textField1.getText());
+            }
+        });
     }
 
     List<Animal> animalList = new ArrayList<>();
