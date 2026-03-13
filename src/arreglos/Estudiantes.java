@@ -128,6 +128,31 @@ public class Estudiantes
         }
     }
 
+    public void rangos()
+    {
+        int reprobados = 0;
+        int aprobadoBasico = 0;
+        int bueDesempeoo = 0;
+        int excelente = 0;
+
+        for (int i = 0; i < notas.length; i++)
+        {
+            if (notas[i] >= 0 && notas[i] <= 2.9)
+                reprobados++;
+            else if (notas[i] >= 3 && notas[i] <= 3.9)
+                aprobadoBasico++;
+            else if (notas[i] >= 4 && notas[i] <= 4.5)
+                bueDesempeoo++;
+            else if (notas[i] >= 4.6)
+                excelente++;
+        }
+
+        System.out.println("Reprobados: "+reprobados);
+        System.out.println("Aprobado Basico: "+aprobadoBasico);
+        System.out.println("Bue Desempeoo: "+bueDesempeoo);
+        System.out.println("Excelente: "+excelente);
+    }
+
 
 
     public static void main(String[] args) {
