@@ -71,7 +71,7 @@ public class Arrays
 
     public void menu()
     {
-        int op = Integer.parseInt(JOptionPane.showInputDialog("1.Mostrar \n2.Agregar \n3.Eliminar \n4.Editar \n5.Buscar \n0.Salir"));
+        int op = Integer.parseInt(JOptionPane.showInputDialog("1.Mostrar \n2.Agregar \n3.Eliminar \n4.Editar \n5.Existe \n6.Posicion \n0.Salir"));
         switch (op)
         {
             case 1:
@@ -81,10 +81,16 @@ public class Arrays
                 agregar();
                 break;
             case 3:
+                eliminar();
                 break;
             case 4:
+                editar();
                 break;
             case 5:
+                existeDato();
+                break;
+            case 6:
+                posicionDato();
                 break;
             case 0:
                 System.exit(0);
