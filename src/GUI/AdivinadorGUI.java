@@ -26,17 +26,29 @@ public class AdivinadorGUI
             public void actionPerformed(ActionEvent e)
             {
                 int numero = Integer.parseInt(campoNumero.getText());
+                int diferencia = Math.abs(numeroAdivinar - numero);
 
                 if (numero == numeroAdivinar)
                 {
                     JOptionPane.showMessageDialog(null,"Eres un genio, Adivinaste!!");
                     mainPanel.setBackground(Color.green);
                 }
-                else
+                else if(diferencia >= 1 && diferencia <= 3)
                 {
-                    JOptionPane.showMessageDialog(null,"Lo siento, Intentalo de nuevo");
+                    JOptionPane.showMessageDialog(null,"Caliente");
                     mainPanel.setBackground(Color.red);
                 }
+                else if(diferencia >= 4 && diferencia <= 6)
+                {
+                    JOptionPane.showMessageDialog(null,"Tibio");
+                    mainPanel.setBackground(Color.orange);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Frio");
+                    mainPanel.setBackground(Color.blue);
+                }
+
             }
         });
     }
