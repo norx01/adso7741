@@ -11,46 +11,101 @@ public class AdivinadorGUI
     private JPanel mainPanel;
     private JTextField campoNumero;
     private JButton adivinarButton;
+    private JLabel textVidas;
+    private JButton reiniciarButton;
 
-    int numeroAdivinar = 10;
+    int numeroAdivinar = 0;
+    int vidas = 3;
 
 
     //Constructor de la clase
     public AdivinadorGUI()
     {
-        //generarRamdon();
+        textVidas.setText("Vidas: "+vidas);
+        generarRamdon();
 
         adivinarButton.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                int numero = Integer.parseInt(campoNumero.getText());
-                int diferencia = Math.abs(numeroAdivinar - numero);
-
-                if (numero == numeroAdivinar)
-                {
-                    JOptionPane.showMessageDialog(null,"Eres un genio, Adivinaste!!");
-                    mainPanel.setBackground(Color.green);
-                }
-                else if(diferencia >= 1 && diferencia <= 3)
-                {
-                    JOptionPane.showMessageDialog(null,"Caliente");
-                    mainPanel.setBackground(Color.red);
-                }
-                else if(diferencia >= 4 && diferencia <= 6)
-                {
-                    JOptionPane.showMessageDialog(null,"Tibio");
-                    mainPanel.setBackground(Color.orange);
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Frio");
-                    mainPanel.setBackground(Color.blue);
-                }
+                adivinar();
+            }
+        });
+        campoNumero.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                adivinar();
 
             }
         });
+        reiniciarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reiniciar();
+            }
+        });
+    }
+
+    public void adivinar()
+    {
+        int numero = Integer.parseInt(campoNumero.getText());
+        int diferencia = Math.abs(numeroAdivinar - numero);
+
+        if (numero == numeroAdivinar)
+        {
+            JOptionPane.showMessageDialog(null,"Eres un genio, Adivinaste!!");
+            mainPanel.setBackground(Color.green);
+            adivinarButton.setEnabled(false);
+            campoNumero.setEnabled(false);
+            return;
+        }
+        else if(diferencia >= 1 && diferencia <= 3)
+        {
+            JOptionPane.showMessageDialog(null,"Caliente");
+            mainPanel.setBackground(Color.red);
+            campoNumero.setText("");
+            Toolkit.getDefaultToolkit().beep();
+
+        }
+        else if(diferencia >= 4 && diferencia <= 6)
+        {
+            JOptionPane.showMessageDialog(null,"Tibio");
+            mainPanel.setBackground(Color.orange);
+            campoNumero.setText("");
+            Toolkit.getDefaultToolkit().beep();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Frio");
+            mainPanel.setBackground(Color.blue);
+            campoNumero.setText("");
+            Toolkit.getDefaultToolkit().beep();
+        }
+        vidas--;
+        textVidas.setText("Vidas: "+vidas);
+
+        if (vidas == 0)
+        {
+            JOptionPane.showMessageDialog(null,"Game Over, Perdedor");
+            mainPanel.setBackground(Color.black);
+            adivinarButton.setEnabled(false);
+            campoNumero.setEnabled(false);
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(null,"El numero era: "+numeroAdivinar);
+        }
+    }
+
+    public void reiniciar()
+    {
+        generarRamdon();
+        vidas = 3;
+        textVidas.setText("Vidas: "+vidas);
+        mainPanel.setBackground(Color.white);
+        adivinarButton.setEnabled(true);
+        campoNumero.setEnabled(true);
+        campoNumero.setText("");
     }
 
     //metodo para crear numero aleatorio
